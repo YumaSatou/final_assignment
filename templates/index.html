@@ -10,7 +10,7 @@
     {% if error != null %}
         <p style= 'color:red'>{{error}}</p>
     {% endif %}
-    {% if %} 
+   
     <form action= "{{url_for('login')}}" method="post">
         ユーザー名:<input type="text" name = "username" value="{{data.user_name if data is defined else ''}}" ><br>
         パスワード:<input type="password" name = "password" value="{{data.password if data is defined else ''}}"><br>

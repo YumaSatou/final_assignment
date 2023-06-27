@@ -19,10 +19,10 @@ def index():
 @app.route('/', methods = ['POST'])
 def login():
     user_name = request.form.get('username')
-    mail = request.form.get('mail')
     password = request.form.get('password')
     #ログイン判定
-    if db.login(user_name,mail, password):
+   
+    if db.login(user_name, password):
         session['user'] = True        #sessionにキー:'user', バリュー:Trueを追加
         session.permanent = True
         app.permanent_session_lifetime = timedelta(minutes=1)
@@ -48,7 +48,6 @@ def register_form():
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
     user_name=request.form.get('username')
-    mail=request.form.get('mail')
     password=request.form.get('password')
 # バリデーションチェック
     if user_name=='':
@@ -58,7 +57,7 @@ def register_exe():
         error='パスワードが未入力です'
         return render_template('register.html', error=error)
     
-    count=db.insert_user(user_name, mail, password)
+    count=db.insert_user(user_name,password)
     if count == 1:
         msg='登録が完了しました。'
         return redirect(url_for('index', msg=msg)) # Redirect でindex()にGet アクセス

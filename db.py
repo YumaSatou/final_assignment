@@ -1,9 +1,12 @@
 import os, psycopg2, string, random, hashlib
 
+# ランダムなソルトを生成
 def get_salt():
+    # 文字列の候補(英大小文字 + 数字)
     charset = string.ascii_letters + string.digits
     
-    salt = ''.join(random.choices(charset, k = 30))
+    # charsetからランダムに30文字取り出して結合
+    salt = ''.join(random.choices(charset, k=30))
     return salt
 
 def get_hash(password, salt):
@@ -17,24 +20,24 @@ def get_connection():
     connection = psycopg2.connect(url)
     return connection
 
-def insert_user(user_name, mail, password):
-    sql = 'INSERT INTO admin_account VALUES (default, %s, %s, %s, %s)'
+def insert_user(user_name, password):
+    sql = 'INSERT INTO admin_account VALUES (default, %s, %s, %s)'
     
     salt = get_salt()
     hashed_password = get_hash(password, salt)
     
-    try:
+    try: #例外処理
         connection = get_connection()
         cursor = connection.cursor()
-    
-        cursor.execute(sql, (user_name, mail, hashed_password, password))
-        count = cursor.rowcount()
+        
+        cursor.execute(sql, (user_name, hashed_password, password))
+        count = cursor.rowcount # 更新件数を取得
         connection.commit()
         
-    except psycopg2.DatabaseError:
-        count = 0
-    
-    finally:
+    except psycopg2.DatabaseError:  # Javaでいうcatch 失敗した時の処理をここに書く
+        count = 0 #例外が発生したら0をreturnする
+        
+    finally: # 成功しようが、失敗しようが、closeする
         cursor.close()
         connection.close()
         

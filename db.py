@@ -67,3 +67,26 @@ def login(user_name,password):
         cursor.close()
         connection.close()
     return flg
+
+def select_all_books():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT title, author, publisher FROM books_list"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows
+
+def insert_book(title,author,publisher):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "INSERT INTO books_list VALUES (default, %s, %s, %s)"
+    
+    cursor.execute(sql,(title,author,publisher))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    

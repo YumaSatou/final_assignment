@@ -1,0 +1,36 @@
+{% extends "admin.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/list.css')}}">
+{% endblock %}
+
+
+{% block content %}
+  <h1>一覧</h1>
+  <a href=>図書の新規登録</a>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>出版社</th>
+            <th>編集</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book[0] }}</td>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>
+                <a href={{url_for('update_book', book_id=books_list.id)}}>編集</a>|
+                <a href={{url_for('delete_book', book_id=books_list.id)}}>削除</a>
+            </td>
+        </tr>
+        {% else %}
+        <td>図書が登録されていません</td>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

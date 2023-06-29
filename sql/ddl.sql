@@ -9,5 +9,5 @@ CREATE TABLE books_list(
     id SERIAL PRIMARY KEY,
     title VARCHAR(64),
     author VARCHAR(64),
-    publlisher VARCHAR(64)
+    publisher VARCHAR(64)
 );

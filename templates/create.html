@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block content %}
+  <h1>登録</h1>
+  <form action="{{url_for('create_exe')}}"method="post">
+    タイトル：<input type="text" name="title"><br>
+    著者：<input type="text" name="author"><br>
+    出版社：<input type="text" name="publisher"><br>
+    <button type="submit">登録</button>
+  </form>
+{% endblock %}

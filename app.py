@@ -71,5 +71,23 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('index'))
 
+@app.route('/list')
+def book_list():
+    library = db.select_all_books()
+    return render_template('list.html', books=library)
+
+@app.route('/create')
+def create_book():
+    return render_template('create.html')
+
+@app.route('/create_exe', methods=['POST'])
+def create_exe():
+    title=request.form.get('title')
+    author=request.form.get('author')
+    publisher=request.form.get('publisher')
+    db.insert_book(title,author,publisher)
+    library = db.select_all_books()
+    return render_template('list.html', books=library)
+
 if __name__ == '__main__':
     app.run(debug=True)

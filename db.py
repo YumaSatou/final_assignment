@@ -83,10 +83,21 @@ def select_all_books():
 def insert_book(title,author,publisher):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "INSERT INTO books_list VALUES (default, %s, %s, %s)"
+    sql = "INSERT INTO books_list VALUES(default, %s, %s, %s)"
     
     cursor.execute(sql,(title,author,publisher))
     connection.commit()
     cursor.close()
     connection.close()
+    
+def edit_book(book_id,title,author,publisher):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "UPDATE books_list SET title=?, author=?, publisher=? WHERE id = ?"
+    
+    cursor.execute(sql,(title,author,publisher, book_id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    
     

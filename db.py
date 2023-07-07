@@ -71,7 +71,7 @@ def login(user_name,password):
 def select_all_books():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT title, author, publisher FROM books_list"
+    sql = "SELECT id,title, author, publisher FROM books_list ORDER BY id ASC"
     
     cursor.execute(sql)
     rows = cursor.fetchall()
@@ -93,11 +93,42 @@ def insert_book(title,author,publisher):
 def edit_book(book_id,title,author,publisher):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "UPDATE books_list SET title=?, author=?, publisher=? WHERE id = ?"
+    sql = "UPDATE books_list SET title=%s, author=%s, publisher=%s WHERE id = %s"
     
     cursor.execute(sql,(title,author,publisher, book_id))
     connection.commit()
     cursor.close()
     connection.close()
     
+def get_book_and_check(book_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM books_list WHERE id = %s"
+    
+    cursor.execute(sql, (book_id,))
+    row = cursor.fetchone()
+  
+    cursor.close()
+    connection.close()
+    if row:
+        book = {
+            "id": row[0],
+            "title": row[1],
+            "author": row[2],
+            "publisher": row[3]
+        }
+        return book
+    else:
+        return None
+    
+
+def delete_book(book_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "DELETE FROM books_list WHERE id = %s"
+    
+    cursor.execute(sql, (book_id,))
+    connection.commit()
+    cursor.close()
+    connection.close()
     

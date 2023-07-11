@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block content %}
+  <h1>本の編集</h1>
+  
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+  <div class="{{ category }}">{{ message }}</div>
+  {% endfor %}
+
+  <form action="{{url_for('update_exe', book_id=book.id)}}" method="post">
+    タイトル：<input type="text"  name="title" value="{{book.title}}"><br>
+    著者：<input type="text" name="author" value="{{book.author}}"><br>
+    出版社：<input type="text" name="publisher" value="{{book.publisher}}"><br>
+    <button type="submit">更新</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block content %}
+  <h1>検索画面</h1>  <a href="{{url_for('book_list')}}">戻る</a>
+  <form action="{{url_for('search_exe')}}" method="post">
+    図書名：<input type="text" name="title"><br>
+    <button type="submit">検索</button>
+  </form>
+{% endblock %}

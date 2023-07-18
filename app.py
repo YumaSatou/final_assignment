@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import db, string, random
 from datetime import timedelta
 
@@ -88,6 +88,47 @@ def create_exe():
     db.insert_book(title,author,publisher)
     library = db.select_all_books()
     return render_template('list.html', books=library)
+
+@app.route('/update/<int:book_id>', methods=['GET'])
+def update_book(book_id):
+    book = db.get_book_and_check(book_id)
+    return render_template('update.html', book=book)
+
+@app.route('/update_exe/<int:book_id>', methods=['POST'])
+def update_exe(book_id):
+    book = db.get_book_and_check(book_id)
+    #book_id=request.form.get('book_id')
+    title = request.form.get('title')
+    author=request.form.get('author')
+    publisher=request.form.get('publisher')
+    db.edit_book(book_id,title,author,publisher)
+    library = db.select_all_books()
+    flash('図書が編集されました', category='alert alert-info')
+    return render_template('list.html', books=library)
+
+@app.route('/delete/<int:book_id>', methods=['GET'])
+def delete_book(book_id):
+    book = db.get_book_and_check(book_id)
+    return render_template('delete.html', book=book)
+
+@app.route('/delete_exe/<int:book_id>', methods=['POST'])
+def delete_exe(book_id):
+    db.delete_book(book_id)
+    library = db.select_all_books()
+    flash('図書が削除されました', category='alert alert-info')
+    return render_template('list.html', books=library)
+
+@app.route('/search')
+def search_book():
+    return render_template('search.html')
+
+@app.route('/search_exe', methods=['POST'])
+def search_exe():
+    title = request.form.get('title')
+    
+    library = db.search_book(title)
+    return render_template('search_result.html', books=library, title=title)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

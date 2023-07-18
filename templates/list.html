@@ -1,4 +1,4 @@
-{% extends "admin.html" %}
+{% extends "layout.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='/css/list.css')}}">
@@ -6,8 +6,17 @@
 
 
 {% block content %}
-  <h1>一覧</h1>
-  <a href=>図書の新規登録</a>
+  <h1 class="pom">図書一覧</h1>
+  
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+  <div class="{{ category }}">{{ message }}</div>
+  {% endfor %}
+  <div style="text-align:left" class="doo">
+  <a class="h3" href="{{url_for('create_book')}}">図書の新規登録</a>
+    <div class="bom">
+      <p><a class="h3" href="{{url_for('search_book')}}"> 図書の検索</a></p>
+    </div>
+  </div>
   <table class="table table-striped">
     <thead>
         <tr>
@@ -18,19 +27,17 @@
         </tr>
     </thead>
     <tbody>
-        {% for book in books %}
-        <tr>
-            <td>{{ book[0] }}</td>
-            <td>{{ book[1] }}</td>
-            <td>{{ book[2] }}</td>
-            <td>
-                <a href={{url_for('update_book', book_id=books_list.id)}}>編集</a>|
-                <a href={{url_for('delete_book', book_id=books_list.id)}}>削除</a>
-            </td>
+    {% for book in books %}
+        <tr> 
+        <td>{{ book[1] }}</td>
+        <td>{{ book[2] }}</td>
+        <td>{{ book[3] }}</td>
+        <td>
+            <a href="{{url_for('update_book', book_id=book[0])}}">編集</a>|
+            <a href="{{url_for('delete_book', book_id=book[0])}}">削除</a>
+        </td>
         </tr>
-        {% else %}
-        <td>図書が登録されていません</td>
-        {% endfor %}
+    {% endfor %}
     </tbody>
   </table>
 {% endblock %}

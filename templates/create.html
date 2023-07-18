@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content %}
-  <h1>登録</h1>
+<div class = "create">
+  <h1>本の登録</h1>
   <form action="{{url_for('create_exe')}}" method="post">
-    タイトル：<input type="text" name="title"><br>
-    著者：<input type="text" name="author"><br>
-    出版社：<input type="text" name="publisher"><br>
-    <button type="submit">登録</button>
+    <h4>タイトル：<input type="text" name="title"><br></h4>
+    <h4>著者：<input type="text" name="author"><br></h4>
+      <h4>出版社：<input type="text" name="publisher"><br></h4>
+    <button type="submit" class="btn btn-primary">登録</button>
   </form>
+  <h2 style="margin-top:25px"><a href="{{url_for('book_list')}}">戻る</a></h2>
+</div>
+ 
 {% endblock %}

@@ -6,7 +6,7 @@
 
 {% block content %}
     {% if books %}
-        <h2>検索結果:</h2>
+        <h2>検索結果</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -29,5 +29,5 @@
         {% else %}
             <p>該当する図書はありません。</p>
         {% endif %}
-<h3><a href="{{url_for('book_list')}}">戻る</a></h3>
+<h4><a href="{{url_for('book_list')}}">戻る</a></h4>
 {% endblock %}

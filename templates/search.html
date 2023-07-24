@@ -7,8 +7,8 @@
 {% block content %}
   <h1 class="search">検索画面</h1>  
   <form action="{{url_for('search_exe')}}" method="post">
-    <h3 style="margin-bottom:25px">図書名：<input type="text" name="title"><br></h3>
+    <h4 style="margin-bottom:25px">図書名：<input type="text" name="title"><br></h4>
     <button type="submit" class="btn btn-primary btn-large">検索</button>
   </form>
-  <h2 style="margin-top:25px"><a href="{{url_for('book_list')}}">戻る</a></h2>
+  <h4 style="margin-top:25px"><a href="{{url_for('book_list')}}">戻る</a></h4>
 {% endblock %}

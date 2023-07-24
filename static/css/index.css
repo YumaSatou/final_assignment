@@ -1,13 +1,37 @@
 .form-group {
     margin-bottom: 50px;
+    text-align: center;
 }
 
 .form-grep {
     margin-bottom: 35px;
+    text-align: center;
 }
 
 .search {
     margin-bottom: 50px;
     margin-top: 25px;
+}
+
+.login {
+    text-align: center;
+    background-color: lightgreen;
+    width: auto;
+   
+}
+
+.content {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 35%;
+    padding-top: 45px;
+    margin: auto;
+}
+
+p {
+    text-align: center;
 }
 

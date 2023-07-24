@@ -87,6 +87,7 @@ def create_exe():
     publisher=request.form.get('publisher')
     db.insert_book(title,author,publisher)
     library = db.select_all_books()
+    flash('図書が登録されました', category='alert alert-info')
     return render_template('list.html', books=library)
 
 @app.route('/update/<int:book_id>', methods=['GET'])

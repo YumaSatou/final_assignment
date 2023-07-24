@@ -9,7 +9,7 @@
   <h1 class="pom">図書一覧</h1>
   
   {% for category, message in get_flashed_messages(with_categories=true) %}
-  <div class="{{ category }}">{{ message }}</div>
+  <div style="text-align:center" class="{{ category }}">{{ message }}</div>
   {% endfor %}
   <div style="text-align:left" class="doo">
     <a class="h5" href="{{url_for('create_book')}}">図書の新規登録</a>
@@ -40,4 +40,6 @@
     {% endfor %}
     </tbody>
   </table>
+  <br>
+  <br>
 {% endblock %}

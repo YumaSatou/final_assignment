@@ -17,7 +17,9 @@
     text-align: center;
     background-color: lightgreen;
     width: auto;
-   
+    height: 15vh;
+    margin-bottom:50px;
+    padding-top: 20px;
 }
 
 .content {

@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
     <title>Document</title>
 </head>
 <body>
-    <h3>ユーザー登録画面</h3>
+    <h3 class="register">ユーザー登録画面</h3>
     {% if error != null %}
-        <p style="color:red">{{error}}</p>
+        <p style="color:red; text-align:center" >{{error}}</p>
     {% endif %}
+<div class="regi">
     <form action= "{{url_for('register_exe')}}" method="post">
-        ユーザー名:<input type="text" name = "username"><br>
-        パスワード:<input type="password" name = "password"><br>
-        <button type = "submit">登録</button>
+        ユーザー名
+        <input type="text" name = "username" style="margin-top:15px"><br>
+        パスワード
+        <input type="password" name = "password" style="margin-top:35px; margin-bottom:17px"><br>
+        <button type = "submit" class="btn btn-primary" >登録</button>
     </form>
+    <h4 style="margin-top:25px"><a href="{{url_for('index')}}">戻る</a></h4>
+</div>
+    <footer class="footer bg-light fixed-bottom">
+        <div class="container">
+          <p class="text-muted text-center">© 2023 My Flask App</p>
+        </div>
+      </footer>
 </body>
 </html>

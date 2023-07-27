@@ -3,7 +3,7 @@
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='/css/index.css')}}">
 {% endblock %}
-
+<title>検索画面</title>
 {% block content %}
   <h1 class="search">検索画面</h1>  
   <form action="{{url_for('search_exe')}}" method="post">
